@@ -105,7 +105,6 @@ cdef extern from "class.h":
         double H_eq
         double z_eq
         double tau_eq
-
 #BEGIN modification         
         double delta;
         double a_start;
@@ -113,7 +112,9 @@ cdef extern from "class.h":
         double count;  #to print count number of results in the terminal 
         short has_UG;
         double count_terminal;
-# END modification */        
+
+        short model;
+# END modification */    
 
         
 
