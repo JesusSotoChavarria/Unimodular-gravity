@@ -455,6 +455,7 @@ if(pba->count<=pba->count_terminal){
   
   }   
 /*----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------*/
     /* BEGIN MODIFICATION ML */
 
 
@@ -462,6 +463,8 @@ if(pba->has_UG == _TRUE_){
   double rho_dm0 = pba->Omega0_cdm*pow(pba->H0,2.);
   double rho_b0 = pba->Omega0_b*pow(pba->H0,2.);
   double delta = pba->delta;
+  double F_1;
+  double F;
 
 /* densities are all expressed in units of \f$ [3c^2/8\pi G] \f$, ie
       \f$ \rho_{class} = [8 \pi G \rho_{physical} / 3 c^2]\f$ */
@@ -469,9 +472,13 @@ if(pba->has_UG == _TRUE_){
   double Delta_rho =pba->Delta_rho_Lambda*pow(100,2)/pow((_c_/1000),2);
   double a_start = pba->a_start;
   double rho_lambda = pba->Omega0_lambda*pow(pba->H0,2.);
+  double Model= pba->model;
 
 /* for a ---(a_rad, a_start-delta/2) */
+  if (Model==1){
   if(a<= a_start-delta/2 ){
+  
+    
   // Baryonic density
   pvecback[pba->index_bg_rho_b]= (rho_b0 + (rho_b0/(rho_b0+rho_dm0))*Delta_rho*(pow(a_start,3)+a_start*pow(delta,2)/4))/pow(a,3) ;
   // Dark matter density 
@@ -501,7 +508,18 @@ if(pba->has_UG == _TRUE_){
   pvecback[pba->index_bg_rho_lambda]= rho_lambda;
   
   }
-    
+  }
+
+if (Model==2){
+
+F=-(Delta_rho/(2*_PI_))*pow(delta,3)*(4*(a/delta)*(a_start+a)/delta-2*(a_start/delta)*(-3+pow(a_start/delta,2))*atan((a_start-a)/delta)+(-1+3*pow(a_start/delta,2))*log(1+pow((a_start-a)/delta,2)))/pow(a,3);
+F_1=-(Delta_rho/(2*_PI_))*pow(delta,3)*(4*(a/delta)*(a_start+1)/delta-2*(a_start/delta)*(-3+pow(a_start/delta,2))*atan((a_start-1)/delta)+(-1+3*pow(a_start/delta,2))*log(1+pow((a_start-a)/delta,2)));
+
+pvecback[pba->index_bg_rho_b]= (rho_b0-(rho_b0/(rho_b0+rho_dm0))*F_1)/pow(a,3)+(rho_b0/(rho_b0+rho_dm0))*F ;            
+pvecback[pba->index_bg_rho_cdm]=(rho_dm0-(1-(rho_b0/(rho_b0+rho_dm0)))*F_1)/pow(a,3)+(rho_dm0/(rho_b0+rho_dm0))*F ;
+pvecback[pba->index_bg_rho_lambda]= rho_lambda+ ((Delta_rho)/_PI_)*atan((a-a_start)/delta);
+}
+  
     rho_tot += pvecback[pba->index_bg_rho_cdm];
     p_tot += 0.;
     rho_m += pvecback[pba->index_bg_rho_cdm];
