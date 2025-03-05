@@ -517,7 +517,7 @@ F_1=-(Delta_rho/(2*_PI_))*pow(delta,3)*(4*(a/delta)*(a_start+1)/delta-2*(a_start
 
 pvecback[pba->index_bg_rho_b]= (rho_b0-(rho_b0/(rho_b0+rho_dm0))*F_1)/pow(a,3)+(rho_b0/(rho_b0+rho_dm0))*F ;            
 pvecback[pba->index_bg_rho_cdm]=(rho_dm0-(1-(rho_b0/(rho_b0+rho_dm0)))*F_1)/pow(a,3)+(rho_dm0/(rho_b0+rho_dm0))*F ;
-pvecback[pba->index_bg_rho_lambda]= rho_lambda+ ((Delta_rho)/_PI_)*(atan((a-a_start)/delta)+atan((1-a_start)/delta));
+pvecback[pba->index_bg_rho_lambda]= rho_lambda+ ((Delta_rho)/_PI_)*(atan((a-a_start)/delta)-atan((1-a_start)/delta));
 }
   
     rho_tot += pvecback[pba->index_bg_rho_cdm];
