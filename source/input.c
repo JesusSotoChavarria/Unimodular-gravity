@@ -2721,13 +2721,12 @@ int input_read_parameters_species(struct file_content * pfc,
      printf("Delta_rho_Lambda %f \n",pba->Delta_rho_Lambda);
      printf("--------------------------------------------------");
      printf("\n");}}*/
-
+class_read_double("has_UG", pba->has_UG);
 if (pba->has_UG ==1){
      /* BEGIN MODIFICATION UG */
   class_read_double("delta",pba->delta);
   class_read_double("a_start",pba->a_start);
   class_read_double("Delta_rho_Lambda",pba->Delta_rho_Lambda);
-  class_read_double("has_UG", pba->has_UG);
    /*class_read_double("count_terminal", pba->count_terminal);*/
 
   class_read_double("model", pba->model);
