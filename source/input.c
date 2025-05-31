@@ -6241,6 +6241,11 @@ int input_default_params(struct background *pba,
   /** 1.i) Spectral distortions */
   pop->write_distortions = _FALSE_;
 
+   
+  pba->delta=0.22;
+  pba->a_start=0.8;
+  pba->Delta_rho_Lambda= -0.0003;
+  pba->model= 1;
 
   /** 2) Verbosity */
   pba->background_verbose = 0;
