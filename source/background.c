@@ -630,12 +630,14 @@ fclose(fptr); */
   }
 
   /* Lambda */
-  if (pba->has_lambda == _TRUE_) {
-    pvecback[pba->index_bg_rho_lambda] = pba->Omega0_lambda * pow(pba->H0,2);
-    rho_tot += pvecback[pba->index_bg_rho_lambda];
-    p_tot -= pvecback[pba->index_bg_rho_lambda];
-  }
-
+                                      /* BEGIN MODIFICATION */ 
+  if(pba->has_lambda == _TRUE_){
+    if (pba->has_UG == _FALSE_) {
+                    
+      pvecback[pba->index_bg_rho_lambda] = pba->Omega0_lambda * pow(pba->H0,2);
+      rho_tot += pvecback[pba->index_bg_rho_lambda];
+      p_tot -= pvecback[pba->index_bg_rho_lambda];
+  }}
   /* fluid with w(a) and constant cs2 */
   if (pba->has_fld == _TRUE_) {
 
