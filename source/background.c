@@ -427,20 +427,29 @@ int background_functions(
   p_tot += (1./3.) * pvecback[pba->index_bg_rho_g];
   dp_dloga += -(4./3.) * pvecback[pba->index_bg_rho_g];
   rho_r += pvecback[pba->index_bg_rho_g];
-
+  
+/*-----------------------------------------------------Previous program ---------------------------------------------*/
+  
   /* baryons */
+  if (pba->has_UG != _TRUE_){
   pvecback[pba->index_bg_rho_b] = pba->Omega0_b * pow(pba->H0,2) / pow(a,3);
   rho_tot += pvecback[pba->index_bg_rho_b];
   p_tot += 0;
-  rho_m += pvecback[pba->index_bg_rho_b];
+  rho_m += pvecback[pba->index_bg_rho_b];  }
+  
 
-  /* cdm */
-  if (pba->has_cdm == _TRUE_) {
+  /* cdm */ 
+  if (pba->has_cdm == _TRUE_ && pba->has_UG != _TRUE_ ) {
     pvecback[pba->index_bg_rho_cdm] = pba->Omega0_cdm * pow(pba->H0,2) / pow(a,3);
     rho_tot += pvecback[pba->index_bg_rho_cdm];
     p_tot += 0.;
-    rho_m += pvecback[pba->index_bg_rho_cdm];
-  }
+    rho_m += pvecback[pba->index_bg_rho_cdm];   
+  
+
+  
+  }   
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------*/
 
   /* idm */
   if (pba->has_idm == _TRUE_) {
