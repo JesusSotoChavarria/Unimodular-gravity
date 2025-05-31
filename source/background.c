@@ -444,14 +444,7 @@ int background_functions(
     p_tot += 0.;
     rho_m += pvecback[pba->index_bg_rho_cdm];   
   
-  /* TERMINAL */
-if(pba->count<=pba->count_terminal){ 
-  printf("count %f\n ", pba->count);
-  printf("a= %f\n ", a);
-  printf("RHO_m %f\n ", rho_m);
-  printf("RHO_r %f\n ", rho_r);
-  pba->count=pba->count+  1;
-  } 
+
   
   }   
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -519,7 +512,7 @@ pvecback[pba->index_bg_rho_b]= (rho_b0-(rho_b0/(rho_b0+rho_dm0))*F_1)/pow(a,3)+(
 pvecback[pba->index_bg_rho_cdm]=(rho_dm0-(1-(rho_b0/(rho_b0+rho_dm0)))*F_1)/pow(a,3)+(rho_dm0/(rho_b0+rho_dm0))*F/pow(a,3) ;
 pvecback[pba->index_bg_rho_lambda]= rho_lambda+ ((Delta_rho)/_PI_)*(atan((a-a_start)/delta)-atan((1-a_start)/delta));
 }
-  
+    
     rho_tot += pvecback[pba->index_bg_rho_cdm];
     p_tot += 0.;
     rho_m += pvecback[pba->index_bg_rho_cdm];
@@ -651,13 +644,13 @@ fclose(fptr); */
 
   /* Lambda */
                                       /* BEGIN MODIFICATION */ 
-  if (pba->has_lambda == _TRUE_ && pba->has_UG ==_FALSE_) {
-                                     /* END MODIFICATION    */
-    
-    pvecback[pba->index_bg_rho_lambda] = pba->Omega0_lambda * pow(pba->H0,2);
-    rho_tot += pvecback[pba->index_bg_rho_lambda];
-    p_tot -= pvecback[pba->index_bg_rho_lambda];
-  }
+  if(pba->has_lambda == _TRUE_){
+    if (pba->has_UG == _FALSE_) {
+                    
+      pvecback[pba->index_bg_rho_lambda] = pba->Omega0_lambda * pow(pba->H0,2);
+      rho_tot += pvecback[pba->index_bg_rho_lambda];
+      p_tot -= pvecback[pba->index_bg_rho_lambda];
+  }}
 
   /* fluid with w(a) and constant cs2 */
   if (pba->has_fld == _TRUE_) {
@@ -1113,15 +1106,21 @@ int background_indices(
 
  /* BEGIN MODIFICATION ML */
   pba->has_UG = _FALSE_;
-
+  
+  if (pba->has_UG  != 0.)
+      pba->has_lambda = _TRUE_;
+  
   if (pba->a_start != 0. )
       pba->has_UG =_TRUE_;
+      pba->has_lambda = _TRUE_;
 
    if (pba->delta!= 0. )
       pba->has_UG =_TRUE_;
+      pba->has_lambda = _TRUE_;
 
    if (pba->Delta_rho_Lambda != 0.)
       pba->has_UG =_TRUE_;
+      pba->has_lambda = _TRUE_;
   
  /* END MODIFICATION M */
 
