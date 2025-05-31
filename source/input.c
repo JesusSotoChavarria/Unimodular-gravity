@@ -2708,13 +2708,14 @@ int input_read_parameters_species(struct file_content * pfc,
 
    /* 7) ** ADDITIONAL SPECIES ** --> Add your species here */
   /* BEGIN MODIFICATION UG */
-  class_read_double("delta",pba->delta);
-  class_read_double("a_start",pba->a_start);
-  class_read_double("Delta_rho_Lambda",pba->Delta_rho_Lambda);
   class_read_double("has_UG", pba->has_UG);
-  class_read_double("count_terminal", pba->count_terminal);
+  if(pba->has_UG==_TRUE_){
+    class_read_double("a_start",pba->a_start);
+    class_read_double("Delta_rho_Lambda",pba->Delta_rho_Lambda);
+    class_read_double("delta",pba->delta);
+    class_read_double("count_terminal", pba->count_terminal);
 
-  class_read_double("model", pba->model);
+    class_read_double("model", pba->model);}
 
   
  
