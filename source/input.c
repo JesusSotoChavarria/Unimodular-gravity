@@ -6179,7 +6179,7 @@ int input_default_params(struct background *pba,
   pop->write_distortions = _FALSE_;
 
 
-  /* BEGIN MODIFICATION UG */
+  /* BEGIN MODIFICATION UG 
   if (pba->has_UG == 1){
    if (pba->a_start == 0. || pba->delta == 0. || pba->Delta_rho_Lambda == 0. ){
      pba->delta=0.22;
@@ -6187,7 +6187,7 @@ int input_default_params(struct background *pba,
      pba->Delta_rho_Lambda= -0.0003;
      pba->model= 1;}}
 
-  /* END MODIFICATION UG */
+   END MODIFICATION UG */
 
    
   /** 2) Verbosity */
