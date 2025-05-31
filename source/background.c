@@ -1110,9 +1110,9 @@ int background_indices(
   if (pba->has_UG  != 0.)
       pba->has_lambda = _TRUE_;
   
-  if (pba->a_start != 0. )
+  if (pba->a_start != 0. ){
       pba->has_UG =_TRUE_;
-      pba->has_lambda = _TRUE_;
+      pba->has_lambda = _TRUE_;}
 
    if (pba->delta!= 0. )
       pba->has_UG =_TRUE_;
