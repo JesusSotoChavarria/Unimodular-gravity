@@ -1107,7 +1107,7 @@ int background_indices(
  /* BEGIN MODIFICATION ML */
   pba->has_UG = _FALSE_;
   
-  if (pba->has_UG  != 0.)
+  if (pba->has_UG  == _TRUE_)
       pba->has_lambda = _TRUE_;
   
   if (pba->a_start != 0. ){
