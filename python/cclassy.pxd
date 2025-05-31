@@ -107,6 +107,13 @@ cdef extern from "class.h":
         double H_eq
         double z_eq
         double tau_eq
+        #BEGIN modification         
+        double delta;
+        double a_start;
+        double Delta_rho_Lambda;
+        short has_UG;
+        short model;
+# END modification */    
 
     cdef struct thermodynamics:
         short is_allocated
